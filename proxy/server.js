@@ -2,6 +2,7 @@ const newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const request = require('request');
 // const morgan = require('morgan');
 const path = require('path');
 const axios = require('axios');
@@ -29,18 +30,27 @@ app.listen(port, () => {
 
 
 app.get('/api/:stockId', (req, res) => {
-  console.log(req.params.stockId);
-  console.log(typeof req.params.stockId);
-  axios({
-    method: 'get',
-    url: `ec2-3-14-71-109.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`,
-    port: 2468,
-  })
-    .then((data) => {
-      res.status(200).json(data.data);
-    })
-    .catch((error) => {
+  request(`ec2-3-14-71-109.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`, (error, response, body) => {
+    console.log(body);
+    if (error) {
       console.log(error);
       res.sendStatus(404);
-    });
+    } else {
+      res.status(200).json(body);
+    }
+  });
+  // console.log(req.params.stockId);
+  // console.log(typeof req.params.stockId);
+  // axios({
+  //   method: 'get',
+  //   url: `ec2-3-14-71-109.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`,
+  //   port: 2468,
+  // })
+  //   .then((data) => {
+  //     res.status(200).json(data.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     res.sendStatus(404);
+  //   });
 });
