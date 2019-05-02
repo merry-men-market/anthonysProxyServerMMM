@@ -33,7 +33,8 @@ app.get('/api/:stockId', (req, res) => {
     .then((data) => {
       res.status(200).json(data.data);
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error);
       res.sendStatus(404);
     });
 });
