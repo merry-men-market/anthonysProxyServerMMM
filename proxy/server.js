@@ -30,7 +30,7 @@ app.listen(port, () => {
 
 
 app.get('/api/:stockId', (req, res) => {
-  request(`ec2-3-14-71-109.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`, (error, response, body) => {
+  request(`ec2-3-14-71-109.us-east-2.compute.amazonaws.com:2468/api/${req.params.stockId}`, (error, response, body) => {
     console.log(body);
     if (error) {
       console.log(error);
