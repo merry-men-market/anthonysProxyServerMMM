@@ -31,7 +31,8 @@ app.listen(port, () => {
 app.get('/api/:stockId', (req, res) => {
   console.log(req.params.stockId);
   console.log(typeof req.params.stockId);
-  axios.get({
+  axios({
+    method: 'get',
     url: `ec2-3-14-71-109.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`,
     port: 2468,
   })
