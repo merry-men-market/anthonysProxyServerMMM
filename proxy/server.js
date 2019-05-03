@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // serve up loader
-// app.use(express.static(path.join(__dirname, '/../public/loaderio')));
-// app.use('/loaderio-881200a39f00d92cb43db8195ee79a0f', express.static(path.join(__dirname, '/../public/loaderio')));
+app.use(express.static(path.join(__dirname, '/public/loaderio')));
+app.use('/loaderio-03bc510cad53b6b7783650de8f5dc113', express.static(path.join(__dirname, '/public/loaderio')));
 
 
 app.listen(port, () => {
@@ -28,12 +28,11 @@ app.listen(port, () => {
 
 
 app.get('/api/:stockId', (req, res) => {
-  axios.get(`http://ec2-3-14-71-109.us-east-2.compute.amazonaws.com:2468/api/${req.params.stockId}`)
+  axios.get(`http://ec2-13-58-33-5.us-east-2.compute.amazonaws.com/api/${req.params.stockId}`)
     .then((data) => {
       res.status(200).json(data.data);
     })
     .catch((error) => {
-      console.log(error);
       res.sendStatus(404);
     });
 });
